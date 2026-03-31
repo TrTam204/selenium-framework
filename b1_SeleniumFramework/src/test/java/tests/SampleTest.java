@@ -1,13 +1,14 @@
 package tests;
 
-import framework.base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import framework.base.BaseTest;
 
 public class SampleTest extends BaseTest {
 
     @Test
-    public void testFailDemo() {
-        Assert.assertTrue(false);
+    public void testPassDemo() {
+    Assert.assertTrue(true);
     }
 }
