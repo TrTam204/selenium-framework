@@ -22,8 +22,6 @@ jobs:
       matrix:
         browser: [chrome, firefox]   # ✅ đúng đề
 
-    steps:
-    - uses: actions/checkout@v4
 
     - name: Set up JDK 17
       uses: actions/setup-java@v4
