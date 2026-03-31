@@ -10,6 +10,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+    matrix:
+      browser: [chrome, firefox]
+      fail-fast: false # Có thể thêm firefox, edge nếu cần
 
     steps:
     - uses: actions/checkout@v4
@@ -22,14 +26,14 @@ jobs:
         cache: 'maven' # Bật Maven cache
 
     - name: Build and Test with Maven
-      run: cd b1_SeleniumFramework && mvn clean test -Dbrowser=chrome -Denv=dev -DsuiteXmlFile=testng-smoke.xml -Dheadless=true
+      run: cd b1_SeleniumFramework && mvn clean test -Dbrowser=${{ matrix.browser }} -Denv=dev -DsuiteXmlFile=testng-smoke.xml -Dheadless=true
 
 
     - name: Upload Test Reports
       if: always() 
       uses: actions/upload-artifact@v4
       with:
-        name: test-reports
+        name: test-results-${{ matrix.browser }}
         path: |
           target/surefire-reports/
           target/screenshots/
